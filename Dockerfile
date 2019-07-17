@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
 MAINTAINER Sumit Kumar <email@email.com>
 
@@ -25,7 +25,15 @@ VOLUME ["/mqtt/config", "/mqtt/data", "/mqtt/log"]
 
 EXPOSE 1883 9001
 
-ADD docker-entrypoint.sh /usr/bin/
+# Setting python
+#WORKDIR /app
+#ADD . /app
+# Using pip:
+#RUN python3 -m pip install -r requirements.txt
+#CMD ["python3", "-m", "dockermqtt"]
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ADD docker-entrypoint.sh /usr/bin/
+RUN chmod 777 /usr/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 CMD ["/usr/sbin/mosquitto", "-c", "/mqtt/config/mosquitto.conf"]

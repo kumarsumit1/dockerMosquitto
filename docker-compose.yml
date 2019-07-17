@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  dockermqtt:
+    image: mosquittop
+    build: .
+    ports:
+      - 1883:1883
