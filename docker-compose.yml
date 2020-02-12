@@ -1,8 +1,10 @@
-version: '2.1'
+version: '3.0'
 
 services:
   dockermqtt:
-    image: mosquittop
-    build: .
+    image: mosquitto
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 1883:1883
